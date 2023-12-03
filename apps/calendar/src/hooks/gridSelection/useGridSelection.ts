@@ -192,11 +192,11 @@ export function useGridSelection<DateCollection>({
     },
     onDragStart: (e) => {
       // The grid selection is created on mousemove in case of the drag event.
-      setGridSelectionByPosition(e);
+      // setGridSelectionByPosition(e);
     },
     onDrag: (e) => {
       if (isSelectingGridRef.current) {
-        setGridSelectionByPosition(e);
+        // setGridSelectionByPosition(e);
       }
     },
     onMouseUp: (e, { draggingState }) => {
