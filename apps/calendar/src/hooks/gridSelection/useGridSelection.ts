@@ -77,9 +77,14 @@ export function useGridSelection<DateCollection>({
   const setGridSelectionByPosition = (e: MouseEvent) => {
     const gridPosition = gridPositionFinder(e);
 
+    if (isPresent(gridPosition)) {
+      setGridSelection(type, selectionSorter(gridPosition, gridPosition));
+    }
+    /*
     if (isPresent(initGridPosition) && isPresent(gridPosition)) {
       setGridSelection(type, selectionSorter(initGridPosition, gridPosition));
     }
+    */
   };
 
   const [handleClickWithDebounce, handleDblClickPreventingClick] = useClickPrevention({
@@ -189,6 +194,9 @@ export function useGridSelection<DateCollection>({
       if (!useFormPopup) {
         addGridSelection(type, gridSelectionRef.current);
       }
+
+      // For customize
+      onMouseUp(e, true);
     },
     onDragStart: (e) => {
       // The grid selection is created on mousemove in case of the drag event.
@@ -202,6 +210,7 @@ export function useGridSelection<DateCollection>({
     onMouseUp: (e, { draggingState }) => {
       e.stopPropagation();
 
+      /*
       const isClickEvent = draggingState <= DraggingState.INIT;
 
       if (isClickEvent) {
@@ -209,6 +218,7 @@ export function useGridSelection<DateCollection>({
       } else {
         onMouseUp(e, isClickEvent);
       }
+      */
     },
     onPressESCKey: clearGridSelection,
   });

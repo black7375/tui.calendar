@@ -73,6 +73,7 @@ export function useDrag(
 
       // prevent text selection on dragging
       e.preventDefault();
+      e.stopPropagation();
 
       setStarted(true);
       initDrag({
@@ -81,8 +82,12 @@ export function useDrag(
         initY: e.clientY,
       });
       onInit?.(e, dndSliceRef.current);
+
+      //  onlu use moude down
+      setStarted(false);
+      reset();
     },
-    [onInit, draggingItemType, initDrag]
+    [onInit, draggingItemType, initDrag, reset]
   );
 
   const handleMouseMove = useCallback<MouseEventListener>(
